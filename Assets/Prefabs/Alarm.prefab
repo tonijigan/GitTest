@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3041234342783871783}
   - component: {fileID: -6236571267687000432}
   - component: {fileID: 8393683038488058362}
+  - component: {fileID: 589161000}
   m_Layer: 0
   m_Name: Alarm
   m_TagString: Untagged
@@ -100,9 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82331b1e65f85b46b64a8e486f43a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 3041234342783871783}
   _audioSource: {fileID: 8393683038488058362}
-  _countIterations: 50
+  _countIterations: 30
 --- !u!95 &3041234342783871783
 Animator:
   serializedVersion: 4
@@ -163,7 +163,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -245,3 +245,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &589161000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949404401782340113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85ec1164cd3d6f4887c70628d59db75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 3041234342783871783}
+  _audioSource: {fileID: 8393683038488058362}

@@ -4,62 +4,38 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
-    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private float _countIterations;
 
-    private string _action—ommand;
+    private const string CommandStartSignal = "1";
+    private const string CommandStopSignal = "2";
+    private string _command;
 
-    private void Start()
+    public void PlayAlarm()
     {
-        _audioSource.volume = _audioSource.minDistance;
+        _command = CommandStartSignal;
     }
 
-    private void Update()
+    public void StopAlarm()
     {
-        StartCoroutine(ChangeVolume());
-
-        if (_audioSource.volume == _audioSource.minDistance)
-        {
-            _animator.SetBool("Alarm", false);
-            _audioSource.Stop();
-            StopCoroutine(ChangeVolume());
-        }
+        _command = CommandStopSignal;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public IEnumerator ChangeVolume(AudioSource audioSource)
     {
-        string commandStartSignal = "1";
-        _action—ommand = commandStartSignal;
-        _animator.SetBool("Alarm", true);
-        _audioSource.Play();
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        string commandStopSignal = "2";
-        _action—ommand = commandStopSignal;
-        _audioSource.volume = 1;
-    }
-
-    private IEnumerator ChangeVolume()
-    {
-        const string CommandStartSignal = "1";
-        const string CommandStopSignal = "2";
         float changeVolume = 0.001f;
 
-        if (_action—ommand == CommandStartSignal)
+        if (_command == CommandStartSignal)
         {
             for (int i = 0; i < _countIterations; i++)
             {
-                _audioSource.volume += changeVolume / _countIterations;
+                audioSource.volume += changeVolume / _countIterations;
             }
         }
-        else if (_action—ommand == CommandStopSignal)
+        else if (_command == CommandStopSignal)
         {
             for (int i = 0; i < _countIterations; i++)
             {
-                _audioSource.volume -= changeVolume / _countIterations;
+                audioSource.volume -= changeVolume / _countIterations;
             }
         }
         yield return null;
