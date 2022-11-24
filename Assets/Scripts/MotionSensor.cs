@@ -8,15 +8,14 @@ public class MotionSensor : MonoBehaviour
     private const string CommandStopSignal = "2";
     public string Command { get; private set; }
 
-    public void SetCommandZero()
+    public void CommandSetNull()
     {
-        const string CommandZero = "0";
-        Command = CommandZero;
+        Command = null;
     }
 
     private void Start()
     {
-        SetCommandZero();
+        CommandSetNull();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

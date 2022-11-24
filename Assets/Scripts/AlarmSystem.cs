@@ -8,44 +8,59 @@ public class AlarmSystem : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _audioSource;
 
-    private const string IsAlarm = "Alarm";
-    private AlarmVolume _alarm;
-    private Coroutine _coroutine;
+    private AlarmVolume _alarmVolume;
     private MotionSensor _motionSensor;
+    private const string IsAlarm = "Alarm";
+    private const string CommandTurnUpVolume = "1";
+    private const string CommandTurnDownVolume = "2";
 
     private void Start()
     {
-        _alarm = GetComponent<AlarmVolume>();
+        _alarmVolume = GetComponent<AlarmVolume>();
         _motionSensor = GetComponent<MotionSensor>();
         _audioSource.volume = _audioSource.minDistance;
     }
 
     private void Update()
     {
-        if (_motionSensor.Command == "0")
+        if (_motionSensor.Command != null)
         {
-            StopCoroutine(_alarm.ChangeVolume(_audioSource, _motionSensor.Command));
-        }
-        else if (_motionSensor.Command == "1" || _motionSensor.Command == "2")
-        {
-            Play();
+            WorkSignal(_motionSensor.Command);
         }
     }
 
-    public void Play()
+    public void WorkSignal(string command)
+    {
+        PlayAudio();
+        ChangeVolume(command);
+    }
+
+    private void PlayAudio()
     {
         if (!_audioSource.isPlaying)
         {
             _audioSource.Play();
         }
-        StartCoroutine(_alarm.ChangeVolume(_audioSource, _motionSensor.Command));
-        _animator.SetBool(IsAlarm, true);
+    }
 
-        if (_audioSource.volume == _audioSource.minDistance)
+    private void ChangeVolume(string command)
+    {
+        if (command == CommandTurnUpVolume)
         {
-            _audioSource.Stop();
-            _animator.SetBool(IsAlarm, false);
-            _motionSensor.SetCommandZero();
+            StartCoroutine(_alarmVolume.TurnUpVolume(_audioSource));
+            _animator.SetBool(IsAlarm, true);
+        }
+        else if (command == CommandTurnDownVolume)
+        {
+            float minVolume = 0.01f;
+            StartCoroutine(_alarmVolume.TurnDownVolume(_audioSource));
+
+            if (_audioSource.volume < minVolume)
+            {
+                _animator.SetBool(IsAlarm, false);
+                _audioSource.Stop();
+                _motionSensor.CommandSetNull();
+            }
         }
     }
 }

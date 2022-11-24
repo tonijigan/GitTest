@@ -4,38 +4,27 @@ using UnityEngine;
 
 public class AlarmVolume : MonoBehaviour
 {
-    [SerializeField] private float _countIterations;
-
     private const string CommandStartSignal = "1";
     private const string CommandStopSignal = "2";
     private float _changeVolume = 0.001f;
 
-    public IEnumerator ChangeVolume(AudioSource audioSource, string command)
+    public IEnumerator TurnUpVolume(AudioSource audioSource)
     {
-        if (command == CommandStartSignal)
-        {
-            TurnUpVolume(audioSource);
-        }
-        else if (command == CommandStopSignal)
-        {
-            TurnDownVolume(audioSource);
-        }
-        yield return null;
-    }
+        int maxVolume = 1;
 
-    private void TurnUpVolume(AudioSource audioSource)
-    {
-        for (int i = 0; i < _countIterations; i++)
+        while (audioSource.volume != maxVolume)
         {
-            audioSource.volume += _changeVolume / _countIterations;
+            audioSource.volume += _changeVolume * Time.deltaTime;
+            yield return null;
         }
     }
 
-    private void TurnDownVolume(AudioSource audioSource)
+    public IEnumerator TurnDownVolume(AudioSource audioSource)
     {
-        for (int i = 0; i < _countIterations; i++)
+        while (audioSource.volume != audioSource.minDistance)
         {
-            audioSource.volume -= _changeVolume / _countIterations;
+            audioSource.volume -= _changeVolume * Time.deltaTime;
+            yield return null;
         }
     }
 }
