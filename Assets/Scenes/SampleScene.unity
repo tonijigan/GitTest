@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &9667083 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 949404401782340113, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
-  m_PrefabInstance: {fileID: 949404401295972400}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &343138586
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,31 +387,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 949404401782340114, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
   m_PrefabInstance: {fileID: 949404401295972400}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &589161001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9667083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e82331b1e65f85b46b64a8e486f43a91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _countIterations: 10
---- !u!114 &589161008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9667083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cd2f8536a16b744996a64fb16a8d651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &618291637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,6 +1029,113 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _command.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _command.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _command.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 949404401295972401}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnUpVolume.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnDownVolume.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _command.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _command.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WorkSignal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnUpVolume.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnDownVolume.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnUpVolume.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 949404401295972401}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnDownVolume.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 949404401295972401}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnUpVolume.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _command.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AlarmSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnUpVolume.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WorkSignal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnDownVolume.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnDownVolume.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WorkSignal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _command.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnUpVolume.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AlarmSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnDownVolume.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AlarmSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnUpVolume.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnDownVolume.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _command.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnUpVolume.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195800369002593608, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _commandTurnDownVolume.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 949404401782340116, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+--- !u!114 &949404401295972401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 589161000, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+  m_PrefabInstance: {fileID: 949404401295972400}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85ec1164cd3d6f4887c70628d59db75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

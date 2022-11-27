@@ -2,64 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AlarmVolume), typeof(MotionSensor))]
+[RequireComponent(typeof(MotionSensor))]
 public class AlarmSystem : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _audioSource;
 
-    private AlarmVolume _alarmVolume;
-    private MotionSensor _motionSensor;
     private const string IsAlarm = "Alarm";
     private const string CommandTurnUpVolume = "1";
     private const string CommandTurnDownVolume = "2";
 
     private void Start()
     {
-        _alarmVolume = GetComponent<AlarmVolume>();
-        _motionSensor = GetComponent<MotionSensor>();
         _audioSource.volume = _audioSource.minDistance;
-    }
-
-    private void Update()
-    {
-        if (_motionSensor.Command != null)
-        {
-            WorkSignal(_motionSensor.Command);
-        }
     }
 
     public void WorkSignal(string command)
     {
-        PlayAudio();
-        ChangeVolume(command);
+        StartCoroutine(ChangeVolume(command));
     }
 
-    private void PlayAudio()
+    private IEnumerator ChangeVolume(string command)
     {
-        if (!_audioSource.isPlaying)
-        {
-            _audioSource.Play();
-        }
-    }
+        float _changeVolume = 0.2f;
+        int maxVolume = 1;
 
-    private void ChangeVolume(string command)
-    {
         if (command == CommandTurnUpVolume)
         {
-            StartCoroutine(_alarmVolume.TurnUpVolume(_audioSource));
+            _audioSource.Play();
             _animator.SetBool(IsAlarm, true);
+
+            while (_audioSource.volume != maxVolume)
+            {
+                _audioSource.volume += _changeVolume * Time.deltaTime;
+                yield return null;
+            }
         }
         else if (command == CommandTurnDownVolume)
         {
             float minVolume = 0.01f;
-            StartCoroutine(_alarmVolume.TurnDownVolume(_audioSource));
 
-            if (_audioSource.volume < minVolume)
+            while (_audioSource.volume != _audioSource.minDistance)
             {
-                _animator.SetBool(IsAlarm, false);
-                _audioSource.Stop();
-                _motionSensor.CommandSetNull();
+                _audioSource.volume -= _changeVolume * Time.deltaTime;
+
+                if (_audioSource.volume < minVolume)
+                {
+                    _animator.SetBool(IsAlarm, false);
+                    _audioSource.Stop();
+                }
+                yield return null;
             }
         }
     }

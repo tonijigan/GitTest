@@ -1,30 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MotionSensor : MonoBehaviour
 {
-    private const string CommandStartSignal = "1";
-    private const string CommandStopSignal = "2";
-    public string Command { get; private set; }
-
-    public void CommandSetNull()
-    {
-        Command = null;
-    }
-
-    private void Start()
-    {
-        CommandSetNull();
-    }
+    [SerializeField] private UnityEvent<string> _commandTurnUpVolume, _commandTurnDownVolume;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Command = CommandStartSignal;
+        const string commandTurnUpVolume = "1";
+        _commandTurnUpVolume.Invoke(commandTurnUpVolume);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Command = CommandStopSignal;
+        const string commandTurnDownVolume = "2";
+        _commandTurnDownVolume.Invoke(commandTurnDownVolume);
     }
 }
