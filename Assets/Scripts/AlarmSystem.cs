@@ -12,47 +12,50 @@ public class AlarmSystem : MonoBehaviour
     private const string CommandTurnUpVolume = "1";
     private const string CommandTurnDownVolume = "2";
 
+    public void TurnUpSignal()
+    {
+        StartCoroutine(ChangeVolume(CommandTurnUpVolume));
+    }
+
+    public void TurnDownSignal()
+    {
+        StartCoroutine(ChangeVolume(CommandTurnDownVolume));
+    }
+
     private void Start()
     {
         _audioSource.volume = _audioSource.minDistance;
     }
 
-    public void WorkSignal(string command)
-    {
-        StartCoroutine(ChangeVolume(command));
-    }
-
     private IEnumerator ChangeVolume(string command)
     {
-        float _changeVolume = 0.2f;
-        int maxVolume = 1;
-
         if (command == CommandTurnUpVolume)
         {
+            int maxVolume = 1;
             _audioSource.Play();
             _animator.SetBool(IsAlarm, true);
 
             while (_audioSource.volume != maxVolume)
             {
-                _audioSource.volume += _changeVolume * Time.deltaTime;
+                ChangeVolume(maxVolume);
                 yield return null;
             }
         }
         else if (command == CommandTurnDownVolume)
         {
-            float minVolume = 0.01f;
-
             while (_audioSource.volume != _audioSource.minDistance)
             {
-                _audioSource.volume -= _changeVolume * Time.deltaTime;
-
-                if (_audioSource.volume < minVolume)
-                {
-                    _animator.SetBool(IsAlarm, false);
-                    _audioSource.Stop();
-                }
+                ChangeVolume(_audioSource.minDistance);
                 yield return null;
             }
+            _animator.SetBool(IsAlarm, false);
+            _audioSource.Stop();
         }
+    }
+
+    private void ChangeVolume(float targetVolume)
+    {
+        float changeVolume = 0.3f;
+        _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, changeVolume * Time.deltaTime);
     }
 }

@@ -5,17 +5,15 @@ using UnityEngine.Events;
 
 public class MotionSensor : MonoBehaviour
 {
-    [SerializeField] private UnityEvent<string> _commandTurnUpVolume, _commandTurnDownVolume;
+    [SerializeField] private UnityEvent _commandTurnUpVolume, _commandTurnDownVolume;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        const string commandTurnUpVolume = "1";
-        _commandTurnUpVolume.Invoke(commandTurnUpVolume);
+        _commandTurnUpVolume.Invoke();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        const string commandTurnDownVolume = "2";
-        _commandTurnDownVolume.Invoke(commandTurnDownVolume);
+        _commandTurnDownVolume.Invoke();
     }
 }
