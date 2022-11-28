@@ -978,6 +978,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1702828756}
     m_Modifications:
     - target: {fileID: 589161000, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
+      propertyPath: _speed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 589161000, guid: 43b36da03d30e894cae1c0360a8a23e2, type: 3}
       propertyPath: _countIterations
       value: 30
       objectReference: {fileID: 0}

@@ -7,55 +7,53 @@ public class AlarmSystem : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private float _speed;
 
+    private Coroutine _currentCoroutine;
     private const string IsAlarm = "Alarm";
-    private const string CommandTurnUpVolume = "1";
-    private const string CommandTurnDownVolume = "2";
+    private int _maxVolume = 1;
 
     public void TurnUpSignal()
     {
-        StartCoroutine(ChangeVolume(CommandTurnUpVolume));
+        WorkOfCoroutine(_maxVolume);
     }
 
     public void TurnDownSignal()
     {
-        StartCoroutine(ChangeVolume(CommandTurnDownVolume));
+        WorkOfCoroutine(_audioSource.minDistance);
     }
-
     private void Start()
     {
         _audioSource.volume = _audioSource.minDistance;
     }
 
-    private IEnumerator ChangeVolume(string command)
+    private void WorkOfCoroutine(float targetVolume)
     {
-        if (command == CommandTurnUpVolume)
+        if (_currentCoroutine != null)
         {
-            int maxVolume = 1;
-            _audioSource.Play();
-            _animator.SetBool(IsAlarm, true);
-
-            while (_audioSource.volume != maxVolume)
-            {
-                ChangeVolume(maxVolume);
-                yield return null;
-            }
+            StopCoroutine(_currentCoroutine);
         }
-        else if (command == CommandTurnDownVolume)
-        {
-            while (_audioSource.volume != _audioSource.minDistance)
-            {
-                ChangeVolume(_audioSource.minDistance);
-                yield return null;
-            }
-            _animator.SetBool(IsAlarm, false);
-            _audioSource.Stop();
-        }
+        _currentCoroutine = StartCoroutine(ChangeVolume(targetVolume));
     }
 
-    private void ChangeVolume(float targetVolume)
+    private IEnumerator ChangeVolume(float targetVolume)
     {
-        float changeVolume = 0.3f;
-        _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, changeVolume * Time.deltaTime);
+        if (targetVolume == _maxVolume)
+        {
+            _audioSource.Play();
+            _animator.SetBool(IsAlarm, true);
+        }
+
+        while (_audioSource.volume != targetVolume)
+        {
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _speed * Time.deltaTime);
+            yield return null;
+        }
+
+        if (targetVolume == _audioSource.minDistance)
+        {
+            _audioSource.Stop();
+            _animator.SetBool(IsAlarm, false);
+        }
     }
 }
