@@ -9,9 +9,11 @@ public class AlarmSystem : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private float _speed;
 
-    private Coroutine _currentCoroutine;
     private const string IsAlarm = "Alarm";
+
+    private Coroutine _currentCoroutine;
     private int _maxVolume = 1;
+    private int _minVolume = 0;
 
     public void TurnUpSignal()
     {
@@ -20,11 +22,11 @@ public class AlarmSystem : MonoBehaviour
 
     public void TurnDownSignal()
     {
-        WorkOfCoroutine(_audioSource.minDistance);
+        WorkOfCoroutine(_minVolume);
     }
     private void Start()
     {
-        _audioSource.volume = _audioSource.minDistance;
+        _audioSource.volume = _minVolume;
     }
 
     private void WorkOfCoroutine(float targetVolume)
@@ -50,7 +52,7 @@ public class AlarmSystem : MonoBehaviour
             yield return null;
         }
 
-        if (targetVolume == _audioSource.minDistance)
+        if (targetVolume == _minVolume)
         {
             _audioSource.Stop();
             _animator.SetBool(IsAlarm, false);
